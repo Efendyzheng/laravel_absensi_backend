@@ -2,29 +2,35 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    //index
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        //search by name, pagination 10
-        $users = User::where('name', 'like', '%' . request('name') . '%')
-            ->orderBy('id', 'desc')
+        $users = User::where('name', 'like', '%' . request('search') . '%')
+            ->orWhere('phone', 'like', '%' . request('search') . '%')
+            ->orderByDesc('id')
             ->paginate(10);
         return view('pages.users.index', compact('users'));
     }
 
-    //create
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
         return view('pages.users.create');
     }
 
-    //store
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
         $request->validate([
@@ -43,16 +49,28 @@ class UserController extends Controller
             'department' => $request->department,
         ]);
 
-        return redirect()->route('users.index')->with('success', 'User created successfully');
+        return redirect()->route('users.index')->with('success', 'User Created Successfully');
     }
 
-    //edit
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
     public function edit(User $user)
     {
         return view('pages.users.edit', compact('user'));
     }
 
-    //update
+    /**
+     * Update the specified resource in storage.
+     */
     public function update(Request $request, User $user)
     {
         $request->validate([
@@ -76,13 +94,15 @@ class UserController extends Controller
             ]);
         }
 
-        return redirect()->route('users.index')->with('success', 'User updated successfully');
+        return redirect()->route('users.index')->with('success', 'User Updated Successfully');
     }
 
-    //destroy
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect()->route('users.index')->with('success', 'User deleted successfully');
+        return redirect()->route('users.index')->with('success', 'User Deleted Successfully');
     }
 }
