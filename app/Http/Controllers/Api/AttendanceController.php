@@ -5,12 +5,14 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Attendance;
+use Illuminate\Support\Facades\Log;
 
 class AttendanceController extends Controller
 {
     //checkin
     public function checkin(Request $request)
     {
+
         //validate lat and long
         $request->validate([
             'latitude' => 'required',

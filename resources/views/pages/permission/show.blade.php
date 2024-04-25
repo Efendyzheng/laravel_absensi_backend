@@ -52,7 +52,7 @@
                                 <div class="row">
                                     <div class="form-group col-md-6 col-12">
                                         <label>Date Permission</label>
-                                        <p>{{ $permission->date_permission }}</p>
+                                        <p>{{ $permission->date }}</p>
                                     </div>
                                     <div class="form-group col-md-6 col-12">
                                         <label>Reason</label>
@@ -62,10 +62,10 @@
                                 <div class="row">
                                     <div class="form-group col-md-6 col-12">
                                         <label>Bukti Dukung</label>
-                                        @if ($permission->image)
+                                        @if ($permission->image_url)
                                             <!-- Jika image tersedia, tampilkan gambar -->
                                             <div>
-                                                <img src="{{ asset('storage/permissions/' . $permission->image) }}"
+                                                <img src="{{ asset('storage/permissions/' . $permission->image_url) }}"
                                                     alt="Bukti Dukung" class="img-thumbnail mb-3" style="max-width: 200px;">
                                             </div>
                                         @else

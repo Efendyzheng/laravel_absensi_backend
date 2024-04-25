@@ -4,14 +4,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
+//login
+Route::post('/login', [App\Http\Controllers\Api\AuthController::class, 'login']);
 
-Route::middleware(['auth:sanctum'])->group(function () {
+Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
-    })->middleware('auth:sanctum');
-
-    //login
-    Route::post('/login', [App\Http\Controllers\Api\AuthController::class, 'login']);
+    });
 
     //logout
     Route::post('/logout', [App\Http\Controllers\Api\AuthController::class, 'logout']);
@@ -32,8 +31,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/update-profile', [App\Http\Controllers\Api\AuthController::class, 'updateProfile']);
 
     //create permission
-    Route::apiResource('/api-permissions', App\Http\Controllers\Api\PermissionController::class)->middleware('auth:sanctum');
+    Route::apiResource('/api-permissions', App\Http\Controllers\Api\PermissionController::class);
 
     //notes
-    Route::apiResource('/api-notes', App\Http\Controllers\Api\NoteController::class)->middleware('auth:sanctum');
+    Route::apiResource('/api-notes', App\Http\Controllers\Api\NoteController::class);
 });
