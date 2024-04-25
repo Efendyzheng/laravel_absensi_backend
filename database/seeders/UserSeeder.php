@@ -20,6 +20,8 @@ class UserSeeder extends Seeder
             'name' => 'Efendy Admin',
             'email' => 'efendy@fic16.com',
             'password' => Hash::make('12345678'),
+            'position' => 'Admin',
+            'department' => 'IT',
         ]);
     }
 }
