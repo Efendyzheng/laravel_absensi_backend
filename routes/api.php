@@ -35,4 +35,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     //notes
     Route::apiResource('/api-notes', App\Http\Controllers\Api\NoteController::class);
+
+    Route::post('/update-fcm-token', [App\Http\Controllers\Api\AuthController::class, 'updateFcmToken']);
 });

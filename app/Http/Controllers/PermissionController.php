@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\SendNotificationHelper;
 use App\Models\Permission;
 use Illuminate\Http\Request;
 
@@ -64,6 +65,10 @@ class PermissionController extends Controller
     {
         $permission->is_approved = $request->is_approved;
         $permission->save();
+
+        $str = $request->is_approved == 1 ? 'Disetujui' : 'Ditolak';
+
+        SendNotificationHelper::sendNotificationToUser($request->user()->id, 'Status Izin anda adalah ' . $str);
 
         return redirect()->route('permissions.index')->with('success', 'Permission Updated Successfully');
     }
