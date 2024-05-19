@@ -102,17 +102,25 @@
                             </div>
                             <div class="form-group">
                                 <label>Department</label>
-                                <input type="text"
-                                    class="form-control @error('department')
+                                
+ 
+                                <select name="department" class="form-control @error('department')
                                 is-invalid
-                            @enderror"
-                                    name="department" value="{{ $user->department }}">
-                                @error('departement')
+                            @enderror">
+                                <option value="0" selected>Please Select Department</option>
+                                @foreach ($departments as $department )
+                                    <option value="{{ $department->id }}" {{ $user->department_id == $department->id ? 'selected' : '' }} >{{ $department->name }}</option>
+                                @endforeach
+                                    
+                                    
+                                </select>
+                                @error('department')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
                             </div>
+
                             <div class="form-group">
                                 <label class="form-label">Roles</label>
                                 <div class="selectgroup w-100">

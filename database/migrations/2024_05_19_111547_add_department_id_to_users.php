@@ -12,11 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('phone')->nullable();
-            $table->string('role')->default('user');
-            $table->string('position')->nullable();
-            $table->text('face_embedding')->nullable();
-            $table->string('image_url')->nullable();
+            $table->foreignId('department_id')->nullable()->constrained('departments')->onDelete('cascade');
         });
     }
 
@@ -26,12 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            //
-            $table->dropColumn('phone');
-            $table->dropColumn('role');
-            $table->dropColumn('position');
-            $table->dropColumn('face_embedding');
-            $table->dropColumn('image_url');
+            $table->dropColumn('department_id');
         });
     }
 };

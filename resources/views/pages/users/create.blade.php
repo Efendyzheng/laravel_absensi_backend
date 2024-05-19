@@ -99,19 +99,28 @@
                                     </div>
                                 @enderror
                             </div>
+
                             <div class="form-group">
                                 <label>Department</label>
-                                <input type="text"
-                                    class="form-control @error('department')
+                                
+ 
+                                <select name="department" class="form-control @error('department')
                                 is-invalid
-                            @enderror"
-                                    name="department">
+                            @enderror">
+                                <option value="0">Please Select Department</option>
+                                @foreach ($departments as $department )
+                                    <option value="{{ $department->id }}">{{ $department->name }}</option>
+                                @endforeach
+                                    
+                                    
+                                </select>
                                 @error('department')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
                             </div>
+                            
                             <div class="form-group">
                                 <label class="form-label">Roles</label>
                                 <div class="selectgroup w-100">

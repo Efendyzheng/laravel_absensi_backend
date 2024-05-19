@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Users')
+@section('title', 'Departments')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -11,14 +11,14 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Users</h1>
+                <h1>Departments</h1>
                 <div class="section-header-button">
-                    <a href="{{ route('users.create') }}" class="btn btn-primary">Add New</a>
+                    <a href="{{ route('departments.create') }}" class="btn btn-primary">Add New</a>
                 </div>
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="#">Users</a></div>
-                    <div class="breadcrumb-item">All Users</div>
+                    <div class="breadcrumb-item"><a href="#">Departments</a></div>
+                    <div class="breadcrumb-item">All Departments</div>
                 </div>
             </div>
             <div class="section-body">
@@ -27,9 +27,9 @@
                         @include('layouts.alert')
                     </div>
                 </div>
-                <h2 class="section-title">Users</h2>
+                <h2 class="section-title">Departments</h2>
                 <p class="section-lead">
-                    You can manage all Users, such as editing, deleting and more.
+                    You can manage all Departments, such as editing, deleting and more.
                 </p>
 
 
@@ -42,7 +42,7 @@
                             <div class="card-body">
 
                                 <div class="float-right">
-                                    <form method="GET" action="{{ route('users.index') }}">
+                                    <form method="GET" action="{{ route('departments.index') }}">
                                         <div class="input-group">
                                             <input type="text" class="form-control" placeholder="Search" name="search">
                                             <div class="input-group-append">
@@ -59,40 +59,32 @@
                                         <tr>
 
                                             <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Phone</th>
-                                            <th>Position</th>
-                                            <th>Department</th>
+                                            <th>Job Description</th>
+                                            <th>Empployee</th>
                                             <th>Created At</th>
                                             <th>Action</th>
                                         </tr>
-                                        @foreach ($users as $user)
+                                        @foreach ($departments as $department)
                                             <tr>
 
-                                                <td>{{ $user->name }}
+                                                <td>{{ $department->name }}
                                                 </td>
                                                 <td>
-                                                    {{ $user->email }}
+                                                    {!! nl2br($department->job_description) !!}
                                                 </td>
                                                 <td>
-                                                    {{ $user->phone }}
+                                                    {{ $department->user_count }}
                                                 </td>
-                                                <td>
-                                                    {{ $user->position }}
-                                                </td>
-                                                <td>
-                                                    {{ $user->department ? $user->department->name : '' }}
-                                                </td>
-                                                <td>{{ $user->created_at }}</td>
+                                                <td>{{ $department->created_at }}</td>
                                                 <td>
                                                     <div class="d-flex justify-content-center">
-                                                        <a href='{{ route('users.edit', $user->id) }}'
+                                                        <a href='{{ route('departments.edit', $department->id) }}'
                                                             class="btn btn-sm btn-info btn-icon">
                                                             <i class="fas fa-edit"></i>
                                                             Edit
                                                         </a>
 
-                                                        <form action="{{ route('users.destroy', $user->id) }}"
+                                                        <form action="{{ route('departments.destroy', $department->id) }}"
                                                             method="POST" class="ml-2">
                                                             <input type="hidden" name="_method" value="DELETE" />
                                                             <input type="hidden" name="_token"
@@ -110,7 +102,7 @@
                                     </table>
                                 </div>
                                 <div class="float-right">
-                                    {{ $users->withQueryString()->links() }}
+                                    {{ $departments->withQueryString()->links() }}
                                 </div>
                             </div>
                         </div>

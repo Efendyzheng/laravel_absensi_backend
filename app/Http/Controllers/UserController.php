@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -13,10 +15,13 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::where('name', 'like', '%' . request('search') . '%')
+        $users = User::with('department')
+            ->where('name', 'like', '%' . request('search') . '%')
             ->orWhere('phone', 'like', '%' . request('search') . '%')
             ->orderByDesc('id')
             ->paginate(10);
+
+
         return view('pages.users.index', compact('users'));
     }
 
@@ -25,7 +30,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('pages.users.create');
+        $departments = Department::all();
+
+        return view('pages.users.create', compact('departments'));
     }
 
     /**
@@ -46,7 +53,7 @@ class UserController extends Controller
             'role' => $request->role,
             'password' => Hash::make($request->password),
             'position' => $request->position,
-            'department' => $request->department,
+            'department_id' => intval($request->department) > 0 ? $request->department : null,
         ]);
 
         return redirect()->route('users.index')->with('success', 'User Created Successfully');
@@ -65,7 +72,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('pages.users.edit', compact('user'));
+        $departments = Department::all();
+
+        return view('pages.users.edit', compact('user', 'departments'));
     }
 
     /**
@@ -84,7 +93,7 @@ class UserController extends Controller
             'phone' => $request->phone,
             'role' => $request->role,
             'position' => $request->position,
-            'department' => $request->department,
+            'department_id' => $request->department > 0 ? $request->department : null,
         ]);
 
         //if password filled

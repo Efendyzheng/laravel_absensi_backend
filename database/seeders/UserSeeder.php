@@ -21,7 +21,6 @@ class UserSeeder extends Seeder
             'email' => 'admin@codewithez.com',
             'password' => Hash::make('12345678'),
             'position' => 'Admin',
-            'department' => 'IT',
         ]);
     }
 }
