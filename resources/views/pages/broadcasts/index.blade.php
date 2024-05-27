@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Users')
+@section('title', 'Broadcasts')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -11,14 +11,14 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Users</h1>
+                <h1>Broadcasts</h1>
                 <div class="section-header-button">
-                    <a href="{{ route('users.create') }}" class="btn btn-primary">Add New</a>
+                    <a href="{{ route('broadcasts.create') }}" class="btn btn-primary">Add New</a>
                 </div>
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="#">Users</a></div>
-                    <div class="breadcrumb-item">All Users</div>
+                    <div class="breadcrumb-item"><a href="#">Broadcasts</a></div>
+                    <div class="breadcrumb-item">All Broadcasts</div>
                 </div>
             </div>
             <div class="section-body">
@@ -27,9 +27,9 @@
                         @include('layouts.alert')
                     </div>
                 </div>
-                <h2 class="section-title">Users</h2>
+                <h2 class="section-title">Broadcasts</h2>
                 <p class="section-lead">
-                    You can manage all Users, such as editing, deleting and more.
+                    You can manage all Broadcasts, such as editing, deleting and more.
                 </p>
 
 
@@ -42,9 +42,9 @@
                             <div class="card-body">
 
                                 <div class="float-right">
-                                    <form method="GET" action="{{ route('users.index') }}">
+                                    <form method="GET" action="{{ route('broadcasts.index') }}">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Search" name="search">
+                                            <input type="text" class="form-control" placeholder="Search" name="search" value="{{ request('search') }}">
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                             </div>
@@ -58,41 +58,33 @@
                                     <table class="table-striped table">
                                         <tr>
 
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Phone</th>
-                                            <th>Position</th>
+                                            <th>Description</th>
                                             <th>Department</th>
                                             <th>Created At</th>
                                             <th>Action</th>
                                         </tr>
-                                        @foreach ($users as $user)
+                                        @foreach ($broadcasts as $broadcast)
                                             <tr>
 
-                                                <td>{{ $user->name }}
+                                                <td>{{ $broadcast->description }}
                                                 </td>
                                                 <td>
-                                                    {{ $user->email }}
+                                                    @if ($broadcast->departmentNames)
+                                                        {{ implode(', ', $broadcast->departmentNames) }}
+                                                    @else
+                                                        All departments
+                                                    @endif
                                                 </td>
-                                                <td>
-                                                    {{ $user->phone }}
-                                                </td>
-                                                <td>
-                                                    {{ $user->position }}
-                                                </td>
-                                                <td>
-                                                    {{ $user->department ? $user->department->name : '' }}
-                                                </td>
-                                                <td>{{ $user->created_at }}</td>
+                                                <td>{{ $broadcast->created_at }}</td>
                                                 <td>
                                                     <div class="d-flex justify-content-center">
-                                                        <a href='{{ route('users.edit', $user->id) }}'
+                                                        <a href='{{ route('broadcasts.edit', $broadcast->id) }}'
                                                             class="btn btn-sm btn-info btn-icon">
                                                             <i class="fas fa-edit"></i>
                                                             Edit
                                                         </a>
 
-                                                        <form action="{{ route('users.destroy', $user->id) }}"
+                                                        <form action="{{ route('broadcasts.destroy', $broadcast->id) }}"
                                                             method="POST" class="ml-2">
                                                             <input type="hidden" name="_method" value="DELETE" />
                                                             <input type="hidden" name="_token"
@@ -101,19 +93,6 @@
                                                                 <i class="fas fa-times"></i> Delete
                                                             </button>
                                                         </form>
-
-                                                        @if($user->hasCurrentAccessToken)
-                                                        
-                                                        <form action="{{ route('user_delete_token', $user->id) }}" method="POST" class="ml-2">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button class="btn btn-sm btn-danger btn-icon confirm-delete">
-                                                                <i class="fas fa-times"></i> Delete Token
-                                                            </button>
-                                                        </form>
-
-                                                        @endif
-                                                        
                                                     </div>
                                                 </td>
                                             </tr>
@@ -123,7 +102,7 @@
                                     </table>
                                 </div>
                                 <div class="float-right">
-                                    {{ $users->withQueryString()->links() }}
+                                    {{ $broadcasts->withQueryString()->links() }}
                                 </div>
                             </div>
                         </div>

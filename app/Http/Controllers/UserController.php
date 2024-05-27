@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Department;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
@@ -21,6 +22,11 @@ class UserController extends Controller
             ->orderByDesc('id')
             ->paginate(10);
 
+        foreach ($users as $user) {
+            $user->load('tokens');
+
+            $user->hasCurrentAccessToken = !$user->tokens->isEmpty();
+        }
 
         return view('pages.users.index', compact('users'));
     }
@@ -113,5 +119,13 @@ class UserController extends Controller
     {
         $user->delete();
         return redirect()->route('users.index')->with('success', 'User Deleted Successfully');
+    }
+
+    public function delete_token($id)
+    {
+        $user = User::findOrFail($id);
+        $user->tokens()->delete();
+
+        return redirect()->route('users.index')->with('success', 'Token User Deleted Successfully');
     }
 }
