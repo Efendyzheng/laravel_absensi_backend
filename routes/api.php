@@ -28,6 +28,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     //is checkin
     Route::get('/is-checkin', [App\Http\Controllers\Api\AttendanceController::class, 'isCheckedin']);
 
+    //history
+    Route::get('/history-attendances', [App\Http\Controllers\Api\AttendanceController::class, 'getHistory']);
+
     //update profile
     Route::post('/update-profile', [App\Http\Controllers\Api\AuthController::class, 'updateProfile']);
 
