@@ -8,6 +8,19 @@ use Illuminate\Http\Request;
 
 class PermissionController extends Controller
 {
+
+    public function index(Request $request)
+    {
+        $permissions = Permission::where('user_id', $request->user()->id)
+            ->orderByDesc('date')
+            ->get();
+
+        return response([
+            'message' => 'Success',
+            'data' => $permissions
+        ], 200);
+    }
+
     public function store(Request $request)
     {
         $request->validate([
