@@ -8,13 +8,13 @@ use Kreait\Firebase\Messaging\Notification;
 
 class SendNotificationHelper
 {
-    public static function sendNotificationToUser($userId, $message)
+    public static function sendNotificationToUser($userId, $title, $body)
     {
         $user = User::find($userId);
         $token = $user->fcm_token;
 
         $messaging = app('firebase.messaging');
-        $notification = Notification::create($message);
+        $notification = Notification::create($title, $body);
 
         $message = CloudMessage::withTarget('token', $token)->withNotification($notification);
 
