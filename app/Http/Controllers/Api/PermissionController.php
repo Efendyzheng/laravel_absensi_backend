@@ -32,7 +32,7 @@ class PermissionController extends Controller
         $permission->user()->associate($request->user()->id);
         $permission->date = $request->date;
         $permission->reason = $request->reason;
-        $permission->is_approved = 0;
+        // $permission->is_approved = 0;
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
