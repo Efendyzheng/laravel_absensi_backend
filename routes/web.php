@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\BroadcastController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\PermissionController;
 
@@ -13,9 +14,7 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('home', function () {
-        return view('pages.dashboard', ['type_menu' => 'home']);
-    })->name('home');
+    Route::get('home', [DashboardController::class, 'index'])->name('home');
 
     Route::resource('users', UserController::class);
     Route::delete('/user/{id}/delete-token', [UserController::class, 'delete_token'])->name('user_delete_token');

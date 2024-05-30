@@ -15,10 +15,10 @@
                     Histories
                 </div>
                 <div class="search-item">
-                    <a href="#">How to hack NASA using CSS</a>
+                    <a href="#">Coming Soon</a>
                     <a href="#" class="search-close"><i class="fas fa-times"></i></a>
                 </div>
-                <div class="search-item">
+                {{-- <div class="search-item">
                     <a href="#">Kodinger.com</a>
                     <a href="#" class="search-close"><i class="fas fa-times"></i></a>
                 </div>
@@ -68,7 +68,7 @@
                         </div>
                         Create a new Homepage Design
                     </a>
-                </div>
+                </div> --}}
             </div>
         </div>
     </form>
@@ -88,12 +88,10 @@
                             <div class="is-online"></div>
                         </div>
                         <div class="dropdown-item-desc">
-                            <b>Kusnaedi</b>
-                            <p>Hello, Bro!</p>
-                            <div class="time">10 Hours Ago</div>
+                            <b>Coming Soon</b>
                         </div>
                     </a>
-                    <a href="#" class="dropdown-item dropdown-item-unread">
+                    {{-- <a href="#" class="dropdown-item dropdown-item-unread">
                         <div class="dropdown-item-avatar">
                             <img alt="image" src="{{ asset('img/avatar/avatar-2.png') }}" class="rounded-circle">
                         </div>
@@ -133,7 +131,7 @@
                             <p>Exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>
                             <div class="time">Yesterday</div>
                         </div>
-                    </a>
+                    </a> --}}
                 </div>
                 <div class="dropdown-footer text-center">
                     <a href="#">View All <i class="fas fa-chevron-right"></i></a>
@@ -154,11 +152,11 @@
                             <i class="fas fa-code"></i>
                         </div>
                         <div class="dropdown-item-desc">
-                            Template update is available now!
+                            Coming Soon
                             <div class="time text-primary">2 Min Ago</div>
                         </div>
                     </a>
-                    <a href="#" class="dropdown-item">
+                    {{-- <a href="#" class="dropdown-item">
                         <div class="dropdown-item-icon bg-info text-white">
                             <i class="far fa-user"></i>
                         </div>
@@ -193,7 +191,7 @@
                             Welcome to Stisla template!
                             <div class="time">Yesterday</div>
                         </div>
-                    </a>
+                    </a> --}}
                 </div>
                 <div class="dropdown-footer text-center">
                     <a href="#">View All <i class="fas fa-chevron-right"></i></a>
@@ -207,7 +205,7 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right">
                 <div class="dropdown-title">Logged in 5 min ago</div>
-                <a href="features-profile.html" class="dropdown-item has-icon">
+                {{-- <a href="features-profile.html" class="dropdown-item has-icon">
                     <i class="far fa-user"></i> Profile
                 </a>
                 <a href="features-activities.html" class="dropdown-item has-icon">
@@ -215,7 +213,7 @@
                 </a>
                 <a href="features-settings.html" class="dropdown-item has-icon">
                     <i class="fas fa-cog"></i> Settings
-                </a>
+                </a> --}}
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item has-icon text-danger"
                     onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
