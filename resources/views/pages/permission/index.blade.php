@@ -81,12 +81,12 @@
                                                     {{ $permission->date }}
                                                 </td>
                                                 <td>
-                                                    @if($permission->is_approved == null)
-                                                        Unverified
-                                                    @elseif($permission->is_approved == 1)
+                                                    @if($permission->is_approved == "1")
                                                         Approved
-                                                    @else
+                                                    @elseif($permission->is_approved == "0")
                                                         Not Approved
+                                                    @else
+                                                        Unverified
                                                     @endif
                                                 </td>
 
