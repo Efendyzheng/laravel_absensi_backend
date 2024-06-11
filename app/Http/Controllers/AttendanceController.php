@@ -22,8 +22,6 @@ class AttendanceController extends Controller
 
     public function destroy(Attendance $attendance)
     {
-        Log::info($attendance);
-
         $attendance->delete();
 
         return redirect()->route('attendances.index')->with('success', 'Attendance Delete Successfully');
