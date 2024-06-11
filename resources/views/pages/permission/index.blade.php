@@ -75,7 +75,7 @@
                                                     {{ $permission->user->position }}
                                                 </td>
                                                 <td>
-                                                    {{ $permission->user->department }}
+                                                    {{ $permission->user->department->name }}
                                                 </td>
                                                 <td>
                                                     {{ $permission->date }}
