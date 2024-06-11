@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Attendance;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class AttendanceController extends Controller
 {
@@ -21,8 +22,10 @@ class AttendanceController extends Controller
 
     public function destroy(Attendance $attendance)
     {
+        Log::info($attendance);
+
         $attendance->delete();
 
-        return redirect()->route('permissions.index')->with('success', 'Attendance Delete Successfully');
+        return redirect()->route('attendances.index')->with('success', 'Attendance Delete Successfully');
     }
 }
