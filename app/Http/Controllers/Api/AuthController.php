@@ -47,8 +47,6 @@ class AuthController extends Controller
     //update image profile & face_embedding
     public function updateProfile(Request $request)
     {
-        Log::info($request);
-
         $request->validate([
             'image' => 'required',
             'face_embedding' => 'required',
@@ -56,7 +54,6 @@ class AuthController extends Controller
 
         $user = $request->user();
         $imageData = base64_decode($request->image);
-        // $imageData = $request->image;
         $imageName = uniqid($user->id);
         $imagePath = "profile/{$imageName}.jpg";
 
